@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Inför hemkomsten — Senseye's</title>
+<title>Kontakt — Senseye's</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Karla:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -63,7 +63,7 @@
 
   .banner{
     position:relative;
-    min-height:44vh;
+    min-height:40vh;
     display:flex; align-items:flex-end;
     overflow:hidden;
     background:var(--heading);
@@ -105,34 +105,51 @@
   .full-text{max-width:720px; margin:0 auto; text-align:left;}
   .full-text p{margin-bottom:16px; font-size:16px;}
 
-  .checklist{margin-top:6px;}
-  .checklist li{
-    list-style:none; padding:11px 0;
-    display:flex; gap:12px; align-items:flex-start;
-    font-size:15.5px; border-top:1px solid var(--hairline);
-  }
-  .checklist li:first-child{border-top:none;}
-  .checklist li::before{content:'✓'; color:var(--sage); flex-shrink:0; font-weight:600;}
-
-  .callout{
+  .contact-card{
+    max-width:560px; margin:40px auto 0;
     background:var(--bg);
     border:1px solid var(--hairline);
     border-left:3px solid var(--sage);
-    padding:28px 32px;
-    margin-top:28px;
-    font-size:15px;
+    padding:40px 36px;
+    text-align:left;
   }
-  .section-bg .callout{background:var(--bg);}
-  .callout strong{color:var(--heading); font-family:'Fraunces', serif; font-weight:500;}
+  .contact-card p{font-size:15px; margin-bottom:24px;}
+  .form-label{
+    display:block; font-size:13px; letter-spacing:0.03em;
+    color:var(--heading); margin:18px 0 6px; font-weight:600;
+  }
+  .form-label:first-of-type{margin-top:0;}
+  .form-input{
+    width:100%; font-family:'Karla', sans-serif; font-size:15px;
+    color:var(--heading); background:#FFFDFA;
+    border:1px solid var(--hairline); border-radius:2px;
+    padding:12px 14px; resize:vertical;
+  }
+  .form-input:focus{outline:none; border-color:var(--sage);}
+  .mail-btn{
+    display:inline-block;
+    font-family:'Fraunces', serif;
+    font-size:16px;
+    border:1px solid var(--button);
+    color:var(--button);
+    background:transparent;
+    padding:14px 28px;
+    border-radius:2px;
+    cursor:pointer;
+    margin-top:22px;
+    transition:background 0.25s ease, color 0.25s ease;
+  }
+  .mail-btn:hover{background:var(--button); color:#FBF8F4;}
+  .mail-note{margin-top:24px; font-size:13px; color:var(--body); opacity:0.75; text-align:center;}
+  .form-confirm{
+    text-align:center; font-size:15.5px; color:var(--heading);
+    padding:12px 0 4px;
+  }
 
-  .closing{
-    text-align:center;
-  }
+  .closing{text-align:center;}
   .closing .eyebrow{justify-content:center;}
   .closing .eyebrow::before{display:none;}
-  .closing p.lede{
-    max-width:56ch; margin:0 auto; font-size:17.5px;
-  }
+  .closing p.lede{max-width:56ch; margin:0 auto; font-size:17.5px;}
 
   footer{background:var(--heading); color:#D8D2C6; padding:90px 0 40px;}
   .footer-top{
@@ -157,6 +174,7 @@
   @media (max-width: 860px){
     section{padding:72px 0;}
     .footer-top{grid-template-columns:1fr; gap:36px;}
+    .contact-card{padding:32px 24px;}
   }
 </style>
 </head>
@@ -169,100 +187,45 @@
       <a href="index.html">Hem</a>
       <a href="index.html#kattungar">Kattungar</a>
       <a href="kopinformation.html">Köpinformation</a>
-      <a href="hemkomsten.html" class="active">Inför hemkomsten</a>
+      <a href="hemkomsten.html">Inför hemkomsten</a>
       <a href="faq.html">FAQ</a>
       <a href="om-senseyes.html">Om Senseye's</a>
       <a href="fodervardskap.html">Fodervärdskap</a>
-      <a href="kontakt.html">Kontakt</a>
+      <a href="kontakt.html" class="active">Kontakt</a>
     </nav>
   </div>
 </header>
 
 <section class="banner">
   <div class="banner-content">
-    <div class="banner-eyebrow">Praktisk guide</div>
-    <h1>Inför <i>hemkomsten</i></h1>
-    <p class="banner-lede">Allt du behöver för en trygg och mjuk start tillsammans med din nya kattunge.</p>
+    <div class="banner-eyebrow">Hör av dig</div>
+    <h1>Kontakta <i>oss</i></h1>
+    <p class="banner-lede">Har du frågor om våra katter, kattungar eller fodervärdskap? Vi svarar gärna.</p>
   </div>
 </section>
 
 <section>
-  <div class="wrap full-text">
-    <div class="eyebrow">Ett varmt välkommen</div>
-    <h2 class="section-title">Välkommen <i>hem</i></h2>
-    <p>Snart är det dags för din kattunge att flytta in hos er. Det är en stor stund — både för kattungen och för er som familj. Här har vi samlat våra bästa råd för att göra övergången så trygg och mjuk som möjligt.</p>
-  </div>
-</section>
+  <div class="wrap full-text" style="text-align:center;">
+    <div class="eyebrow" style="justify-content:center;"><span style="display:none;"></span>Skriv till oss</div>
+    <h2 class="section-title" style="margin:0 auto 20px;">Vi hörs <i>gärna</i></h2>
+    <p style="max-width:56ch; margin:0 auto;">Fyll i formuläret nedan så kommer ditt meddelande till oss. Berätta gärna vad din fråga gäller så återkommer vi så snart vi kan.</p>
 
-<section class="section-bg">
-  <div class="wrap full-text">
-    <div class="eyebrow">Förberedelser</div>
-    <h2 class="section-title">Innan kattungen <i>flyttar hem</i></h2>
-    <p style="margin-bottom:14px;">Här är det som är bra att ha hemma innan kattungen anländer:</p>
-    <ul class="checklist">
-      <li>Kattlåda och strö (gärna samma sort som kattungen är van vid)</li>
-      <li>Foder- och vattenskålar</li>
-      <li>Foder — samma sort som kattungen redan äter</li>
-      <li>En mysig bädd eller filt att sova i</li>
-      <li>Klösbräda eller klösträd</li>
-      <li>Ett par leksaker att utforska</li>
-      <li>Transportbur för hämtning och veterinärbesök</li>
-      <li>Ett lugnt rum där kattungen kan landa i sin egen takt</li>
-    </ul>
-  </div>
-</section>
-
-<section>
-  <div class="wrap full-text">
-    <div class="eyebrow">Mat och matvanor</div>
-    <h2 class="section-title">Mat</h2>
-    <p>Vi rekommenderar att ni fortsätter med samma foder som kattungen fått hos oss den första tiden. Magen är känslig i samband med flytten, och ett byte av foder kan lätt orsaka mage som är i olag.</p>
-    <p>Vill ni byta foder längre fram, gör det gradvis över en till två veckor genom att succesivt blanda in mer av det nya fodret med det gamla.</p>
-  </div>
-</section>
-
-<section class="section-bg">
-  <div class="wrap full-text">
-    <div class="eyebrow">Kattlådan</div>
-    <h2 class="section-title">Kattsand</h2>
-    <p>Precis som med fodret rekommenderar vi att ni fortsätter med samma typ av kattsand som kattungen är van vid den första tiden hemma. Att känna igen dofter och konsistens i lådan gör det lättare för kattungen att känna sig trygg och fortsätta använda den som vanligt.</p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap full-text">
-    <div class="eyebrow">De första timmarna</div>
-    <h2 class="section-title">Första dygnet</h2>
-    <p>Låt kattungen komma ut ur transportburen i sin egen takt i det lugna rum ni förberett. Undvik att trycka på eller lyfta upp kattungen för mycket — låt den utforska på egen hand.</p>
-    <p>Visa var mat, vatten och kattlåda finns, och ge sedan kattungen utrymme att vänja sig. Det är helt normalt att kattungen gömmer sig de första timmarna.</p>
-    <div class="callout"><strong>Bra att veta:</strong> Håll gärna resten av familjen, andra husdjur och höga ljud på lite avstånd de allra första timmarna.</div>
-  </div>
-</section>
-
-<section class="section-bg">
-  <div class="wrap full-text">
-    <div class="eyebrow">Att landa hemma</div>
-    <h2 class="section-title">Första veckan</h2>
-    <p>Ge kattungen tid att successivt utforska mer av hemmet i sin egen takt, snarare än att släppa loss den i alla rum direkt. Regelbundna rutiner kring mat och lek hjälper kattungen att känna sig trygg.</p>
-    <p>Sitt gärna still i rummet och låt kattungen komma till er, istället för att jaga efter den. Med tid, tålamod och närhet landar de allra flesta kattungar snabbt i sitt nya hem.</p>
-  </div>
-</section>
-
-<section>
-  <div class="wrap full-text">
-    <div class="eyebrow">Att tänka på</div>
-    <h2 class="section-title">Försäkring</h2>
-    <p>Glöm inte att teckna en försäkring för din kattunge så snart som möjligt efter hemkomsten, utöver den dolda fel-försäkring som ingår i köpet. En bra försäkring ger extra trygghet om något oväntat skulle hända.</p>
-  </div>
-</section>
-
-<section class="section-bg closing">
-  <div class="wrap">
-    <div class="eyebrow">Efter flytten</div>
-    <h2 class="section-title" style="margin:0 auto 20px;">Vi finns <i>alltid här</i></h2>
-    <p class="lede">Vårt ansvar tar inte slut när kattungen flyttar hem. Vi erbjuder support genom hela kattens liv — hör gärna av dig om du har frågor kring foder, hälsa, beteende, eller bara vill dela hur det går.</p>
-    <div style="margin-top:36px;">
-      <a href="kontakt.html" class="section-title" style="display:inline-block; font-size:16px; border:1px solid var(--button); color:var(--button); padding:14px 28px; border-radius:2px; text-decoration:none;">Kontakta oss</a>
+    <div class="contact-card">
+      <form id="contactForm" action="https://formsubmit.co/anna.westerhoff@outlook.com" method="POST">
+        <input type="hidden" name="_subject" value="Fråga till Senseye's">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="true">
+        <input type="hidden" name="_next" value="kontakt.html?skickat=1">
+        <input type="text" name="_honey" style="display:none">
+        <label class="form-label" for="cf-name">Namn</label>
+        <input class="form-input" type="text" id="cf-name" name="Namn" required>
+        <label class="form-label" for="cf-email">Din e-postadress</label>
+        <input class="form-input" type="email" id="cf-email" name="E-post" required>
+        <label class="form-label" for="cf-message">Meddelande</label>
+        <textarea class="form-input" id="cf-message" name="Meddelande" rows="5" required></textarea>
+        <button type="submit" class="mail-btn">Skicka meddelande</button>
+      </form>
+      <p class="mail-note">Österlen, Skåne</p>
     </div>
   </div>
 </section>
@@ -287,7 +250,7 @@
       <div class="footer-col">
         <h4>Kontakt</h4>
         <p>Österlen, Skåne</p>
-        <a href="kontakt.html">Kontakta oss</a>
+        <p>Fyll i formuläret ovan så hör vi av oss.</p>
       </div>
     </div>
     <div class="footer-bottom">
@@ -304,6 +267,20 @@ const siteImages = {
 };
 document.getElementById('headerLogo').src = siteImages.logo_black;
 document.getElementById('footerLogo').src = siteImages.logo_white;
+
+// If FormSubmit redirected back here after a successful send, show a thank-you note
+// instead of the form.
+(function(){
+  if (window.location.search.indexOf('skickat=1') !== -1) {
+    var form = document.getElementById('contactForm');
+    if (form) {
+      var p = document.createElement('p');
+      p.className = 'form-confirm';
+      p.textContent = 'Tack för ditt meddelande! Vi hör av oss så snart vi kan.';
+      form.parentNode.replaceChild(p, form);
+    }
+  }
+})();
 </script>
 
 </body>
