@@ -427,8 +427,8 @@
     <div class="split-text">
       <div class="eyebrow">Livet på Österlen</div>
       <h2 class="section-title">Livet på Österlen, <i>med oss och katterna</i></h2>
-      <p>Vi är Anna och Ella, mor och dotter, som driver Senseye's i vårt sekelskifteshus på Österlen. Katterna har gott om plats och soliga fönsterbrädor.</p>
-      <p>Här, eller hos en av våra noggrant utvalda fodervärdar, växer våra kattungar upp — tryggt och nära, innan de flyttar vidare till sina nya familjer.</p>
+      <p>Vi heter Anna och Ella och delar en stor kärlek till katter. Från vårt hem på Österlen driver vi Senseye's med fokus på hälsa, temperament och rastyp. Här får katterna leva ett lugnt och harmoniskt liv med gott om plats att vara just katter.</p>
+      <p>Våra kattungar växer upp här hos oss, eller hos någon av våra noggrant utvalda fodervärdar, där de får en trygg och kärleksfull start i livet innan de flyttar till sina nya familjer.</p>
       <a href="om-senseyes.html" class="btn btn-outline">Läs mer om Senseye's</a>
     </div>
     <div>
@@ -495,6 +495,7 @@
     <div class="footer-bottom">
       <span>© 2026 Senseye's</span>
       <span>Ragdoll &amp; Brittiskt kort-/långhår</span>
+      <span id="lastUpdated"></span>
     </div>
   </div>
 </footer>
@@ -554,6 +555,15 @@ document.getElementById('galleryImg11').src = siteImages.gallery11;
 document.getElementById('galleryImg12').src = siteImages.gallery12;
 document.getElementById('galleryImg13').src = siteImages.gallery13;
 document.getElementById('galleryImg14').src = siteImages.gallery14;
+
+// Visar automatiskt när sidan senast ändrades, hämtat från filens eget ändringsdatum
+(function(){
+  var d = new Date(document.lastModified);
+  var manader = ['januari','februari','mars','april','maj','juni','juli','augusti','september','oktober','november','december'];
+  var text = 'Senast uppdaterad ' + d.getDate() + ' ' + manader[d.getMonth()] + ' ' + d.getFullYear();
+  var el = document.getElementById('lastUpdated');
+  if (el) el.textContent = text;
+})();
 </script>
 
 </body>
