@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://senseyes.se/</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://senseyes.se/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://senseyes.se/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://senseyes.se/"/>
+  </url>
+  <url>
+    <loc>https://senseyes.se/en/</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://senseyes.se/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://senseyes.se/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://senseyes.se/"/>
+  </url>
+  <url>
+    <loc>https://senseyes.se/vara-katter.html</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://senseyes.se/vara-katter.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://senseyes.se/en/vara-katter.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://senseyes.se/vara-katter.html"/>
+  </url>
+  <url>
+    <loc>https://senseyes.se/en/vara-katter.html</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://senseyes.se/vara-katter.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://senseyes.se/en/vara-katter.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://senseyes.se/vara-katter.html"/>
+  </url>
+  <url>
+    <loc>https://senseyes.se/om-senseyes.html</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://senseyes.se/om-senseyes.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://senseyes.se/en/om-senseyes.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://senseyes.se/om-senseyes.html"/>
+  </url>
+  <url>
+    <loc>https://senseyes.se/en/om-senseyes.html</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://senseyes.se/om-senseyes.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://senseyes.se/en/om-senseyes.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://senseyes.se/om-senseyes.html"/>
+  </url>
+  <url>
+    <loc>https://senseyes.se/kopinformation.html</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://senseyes.se/kopinformation.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://senseyes.se/en/kopinformation.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://senseyes.se/kopinformation.html"/>
+  </url>
+  <url>
+    <loc>https://senseyes.se/en/kopinformation.html</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://senseyes.se/kopinformation.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://senseyes.se/en/kopinformation.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://senseyes.se/kopinformation.html"/>
+  </url>
+  <url>
+    <loc>https://senseyes.se/hemkomsten.html</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://senseyes.se/hemkomsten.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://senseyes.se/en/hemkomsten.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://senseyes.se/hemkomsten.html"/>
+  </url>
+  <url>
+    <loc>https://senseyes.se/en/hemkomsten.html</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://senseyes.se/hemkomsten.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://senseyes.se/en/hemkomsten.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://senseyes.se/hemkomsten.html"/>
+  </url>
+  <url>
+    <loc>https://senseyes.se/fodervardskap.html</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://senseyes.se/fodervardskap.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://senseyes.se/en/fodervardskap.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://senseyes.se/fodervardskap.html"/>
+  </url>
+  <url>
+    <loc>https://senseyes.se/en/fodervardskap.html</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://senseyes.se/fodervardskap.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://senseyes.se/en/fodervardskap.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://senseyes.se/fodervardskap.html"/>
+  </url>
+  <url>
+    <loc>https://senseyes.se/faq.html</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://senseyes.se/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://senseyes.se/en/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://senseyes.se/faq.html"/>
+  </url>
+  <url>
+    <loc>https://senseyes.se/en/faq.html</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://senseyes.se/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://senseyes.se/en/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://senseyes.se/faq.html"/>
+  </url>
+  <url>
+    <loc>https://senseyes.se/kontakt.html</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://senseyes.se/kontakt.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://senseyes.se/en/kontakt.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://senseyes.se/kontakt.html"/>
+  </url>
+  <url>
+    <loc>https://senseyes.se/en/kontakt.html</loc>
+    <lastmod>2026-08-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="sv" href="https://senseyes.se/kontakt.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://senseyes.se/en/kontakt.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://senseyes.se/kontakt.html"/>
+  </url>
+</urlset>
