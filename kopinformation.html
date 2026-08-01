@@ -151,6 +151,7 @@
     display:grid; grid-template-columns:1.3fr 1fr; gap:60px;
     padding-bottom:60px; border-bottom:1px solid rgba(255,255,255,0.1);
   }
+  .footer-logo{height:52px; width:auto;}
   .footer-tagline{font-family:'Fraunces', serif; font-style:normal; font-weight:400; color:#C9C1B0; margin-top:22px; font-size:clamp(11px, 3.1vw, 15px); letter-spacing:-0.01em; word-spacing:-1px; white-space:nowrap;}
   .footer-col h4{
     font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase;
@@ -177,13 +178,14 @@
     .navlinks{display:none;}
   }
   @media (min-width: 901px){
-    footer .wrap{max-width:1200px;}
+    footer .wrap{max-width:1260px;}
     footer{padding:60px 0 32px;}
     .footer-top{
-      grid-template-columns:1.1fr 1fr 1fr;
-      gap:36px;
+      grid-template-columns:1.2fr 0.8fr 1fr 0.9fr;
+      gap:32px;
       padding-bottom:32px;
     }
+    .footer-logo{height:60px;}
     .footer-bottom{padding-top:24px;}
   }
 
@@ -293,19 +295,21 @@
   <div class="wrap">
     <div class="footer-top">
       <div>
-        <img class="wordmark-logo" id="footerLogo" alt="Senseye's" style="height:52px;">
+        <img class="wordmark-logo footer-logo" id="footerLogo" alt="Senseye's">
         <p class="footer-tagline">Ragdoll • Brittiskt korthår • Brittiskt långhår • Österlen</p>
       </div>
       <div class="footer-col">
         <a href="kopinformation.html">Köpinformation</a>
         <a href="hemkomsten.html">Inför hemkomsten</a>
-        <a href="faq.html">FAQ</a>
       </div>
       <div class="footer-col">
+        <a href="faq.html">FAQ</a>
         <a href="om-senseyes.html">Om Senseye's</a>
         <a href="fodervardskap.html">Fodervärdskap</a>
         <a href="vara-katter.html">Våra katter</a>
-        <a href="kontakt.html" class="icon-link" style="margin-top:16px;">
+      </div>
+      <div class="footer-col">
+        <a href="kontakt.html" class="icon-link">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>
           Kontakta oss
         </a>
