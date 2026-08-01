@@ -307,7 +307,7 @@
     padding:90px 0 40px;
   }
   .footer-top{
-    display:grid; grid-template-columns:1.3fr 1fr 1fr;
+    display:grid; grid-template-columns:1.3fr 1fr;
     gap:60px;
     padding-bottom:60px;
     border-bottom:1px solid rgba(255,255,255,0.1);
@@ -315,8 +315,9 @@
   footer .wordmark{color:#FBF8F4;}
   footer .wordmark em{color:var(--sage);}
   .footer-tagline{
-    font-family:'Fraunces', serif; font-style:italic;
-    color:#C9C1B0; margin-top:14px; font-size:15px;
+    font-family:'Fraunces', serif; font-style:normal; font-weight:400;
+    color:#C9C1B0; margin-top:22px; font-size:clamp(11px, 3.1vw, 15px);
+    letter-spacing:-0.01em; word-spacing:-1px; white-space:nowrap;
   }
   .footer-col h4{
     font-family:'Karla', sans-serif;
@@ -327,6 +328,8 @@
     display:block; color:#D8D2C6; font-size:14.5px; margin-bottom:10px;
   }
   .footer-col a:hover{color:#FBF8F4;}
+  .footer-col a.icon-link{display:flex; align-items:center; gap:10px;}
+  .footer-col a.icon-link svg{flex-shrink:0; opacity:0.85;}
   .footer-bottom{
     display:flex; justify-content:space-between; align-items:center;
     padding-top:32px; font-size:13px; color:#8A8272; flex-wrap:wrap; gap:12px;
@@ -347,6 +350,10 @@
     .why-grid{grid-template-columns:1fr;}
     .gallery-grid{grid-template-columns:1fr; gap:14px;}
     .gallery-grid img{height:260px;}
+  }
+
+  @media (max-width: 360px){
+    .footer-tagline{white-space:normal;}
   }
 </style>
 </head>
@@ -457,8 +464,8 @@
     <div class="eyebrow" style="justify-content:center;">Vardagen hos oss</div>
     <h2 class="section-title" style="margin:0 auto 40px; text-align:center;">Ögonblick <i>från Senseye's</i></h2>
     <div class="gallery-grid">
-      <img id="galleryImg1" alt="Kattunge i vide-korg">
-      <img id="galleryImg4" alt="Nära stund med en kattunge">
+      <img id="galleryImg1" alt="Nära stund med en kattunge">
+      <img id="galleryImg4" alt="Kattunge i vide-korg">
       <img id="galleryImg7" alt="Kattungar vid en LOVE-kudde">
       <img id="galleryImg9" alt="Kattungar tillsammans på en filt">
       <img id="galleryImg10" alt="Kattunge med blå ögon vid kakelugnen">
@@ -475,26 +482,27 @@
     <div class="footer-top">
       <div>
         <img class="wordmark-logo" id="footerLogo" alt="Senseye's" style="height:52px;">
-        <p class="footer-tagline">Ragdoll &amp; Brittiskt kort-/långhår, Österlen</p>
+        <p class="footer-tagline">Ragdoll • Brittiskt korthår • Brittiskt långhår • Österlen</p>
       </div>
       <div class="footer-col">
-        <h4>Utforska</h4>
         <a href="kopinformation.html">Köpinformation</a>
         <a href="hemkomsten.html">Inför hemkomsten</a>
         <a href="faq.html">FAQ</a>
         <a href="om-senseyes.html">Om Senseye's</a>
         <a href="fodervardskap.html">Fodervärdskap</a>
         <a href="vara-katter.html">Våra katter</a>
-      </div>
-      <div class="footer-col">
-        <h4>Kontakt</h4>
-        <p>Österlen, Skåne</p>
-        <a href="kontakt.html">Kontakta oss</a>
+        <a href="kontakt.html" class="icon-link" style="margin-top:26px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6 9-6"></path></svg>
+          Kontakta oss
+        </a>
+        <a href="https://www.instagram.com/senseye_s" target="_blank" rel="noopener" class="icon-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="0.9" fill="currentColor" stroke="none"></circle></svg>
+          Instagram
+        </a>
       </div>
     </div>
-    <div class="footer-bottom">
+    <div class="footer-bottom" style="flex-direction:column; align-items:flex-start; gap:26px;">
       <span>© 2026 Senseye's</span>
-      <span>Ragdoll &amp; Brittiskt kort-/långhår</span>
       <span id="lastUpdated"></span>
     </div>
   </div>
@@ -546,8 +554,8 @@ document.getElementById('breedImg1').src = siteImages.ragdollbreed;
 document.getElementById('breedImg2').src = siteImages.britcat;
 document.getElementById('houseImg').src = siteImages.house;
 document.getElementById('gardenImg').src = siteImages.kittens2;
-document.getElementById('galleryImg1').src = siteImages.catcandles;
-document.getElementById('galleryImg4').src = siteImages.kittenKiss;
+document.getElementById('galleryImg1').src = siteImages.kittenKiss;
+document.getElementById('galleryImg4').src = siteImages.catcandles;
 document.getElementById('galleryImg7').src = siteImages.gallery7;
 document.getElementById('galleryImg9').src = siteImages.gallery9;
 document.getElementById('galleryImg10').src = siteImages.gallery10;
@@ -560,7 +568,7 @@ document.getElementById('galleryImg14').src = siteImages.gallery14;
 (function(){
   var d = new Date(document.lastModified);
   var manader = ['januari','februari','mars','april','maj','juni','juli','augusti','september','oktober','november','december'];
-  var text = 'Senast uppdaterad ' + d.getDate() + ' ' + manader[d.getMonth()] + ' ' + d.getFullYear();
+  var text = 'Uppdaterad ' + d.getDate() + ' ' + manader[d.getMonth()] + ' ' + d.getFullYear();
   var el = document.getElementById('lastUpdated');
   if (el) el.textContent = text;
 })();
