@@ -1,0 +1,103 @@
+/* ---------------------------------------------------------------------------
+   senseyes.se — self-hostade typsnitt
+   Ersätter <link> mot fonts.googleapis.com.
+
+   Två filer behövs i mappen /fonts/ bredvid den här filen:
+     fraunces-variable-latin.woff2
+     karla-variable-latin.woff2
+
+   Se instruktionerna längst ned för hur du hämtar dem.
+--------------------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("/fonts/fraunces-variable-latin.woff2") format("woff2-variations"),
+       url("/fonts/fraunces-variable-latin.woff2") format("woff2");
+  font-weight: 100 900;   /* hela viktaxeln i en enda fil */
+  font-style: normal;
+  font-display: swap;     /* text syns direkt i reservtypsnitt, byts när fonten laddat */
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                 U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Karla";
+  src: url("/fonts/karla-variable-latin.woff2") format("woff2-variations"),
+       url("/fonts/karla-variable-latin.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6,
+                 U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ---------------------------------------------------------------------------
+   Användning — oförändrad mot idag, samma familjenamn som Google levererade.
+--------------------------------------------------------------------------- */
+
+:root {
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Karla", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+h1, h2, h3,
+.logo, .tagline {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings: "SOFT" 40, "WONK" 1;   /* sajtens fulla uttryck */
+}
+
+/* ===========================================================================
+   SÅ HÄR GÖR DU
+
+   1. Hämta filerna
+      Gå till fontsource.org och sök upp Fraunces respektive Karla, eller
+      använd google-webfonts-helper. Välj den VARIABLA versionen och
+      teckenuppsättningen "latin".
+
+      Viktigt för Fraunces: ta den fullständiga variabla filen som innehåller
+      axlarna SOFT och WONK, inte bara viktaxeln. Utan dem tappar rubrikerna
+      den karaktär sajten har idag.
+
+   2. Döp om filerna till exakt:
+        fraunces-variable-latin.woff2
+        karla-variable-latin.woff2
+      Då stämmer de med sökvägarna ovan och du slipper redigera CSS:en.
+
+   3. Lägg dem i en mapp /fonts/ i webbplatsens rot.
+
+   4. I <head> på varje sida: ta bort raderna som pekar mot
+      fonts.googleapis.com och fonts.gstatic.com, och lägg in i stället:
+
+        <link rel="preload" href="/fonts/karla-variable-latin.woff2"
+              as="font" type="font/woff2" crossorigin>
+        <link rel="preload" href="/fonts/fraunces-variable-latin.woff2"
+              as="font" type="font/woff2" crossorigin>
+        <link rel="stylesheet" href="/fonts.css">
+
+      Ordningen spelar roll: Karla först, eftersom brödtexten är det första
+      besökaren behöver kunna läsa.
+
+   5. Kontrollera i webbläsarens nätverksflik att inga anrop går till
+      fonts.googleapis.com eller fonts.gstatic.com längre.
+
+   VARFÖR
+   Prestanda: filerna kommer från samma domän som sajten, utan extra
+   DNS-uppslag och TLS-handskakning innan texten kan ritas ut. Två variabla
+   filer i latinsk delmängd väger tillsammans mindre än de separata vikter
+   Google annars levererar.
+
+   Dataskydd: ett anrop till Googles typsnitts-CDN skickar besökarens
+   IP-adress till Google. Det har ifrågasatts i flera EU-avgöranden, och för
+   en sajt med kontaktformulär och besökare i Sverige är det en onödig fråga
+   att behöva ha ett svar på. Self-hosting gör den irrelevant.
+
+   Licens: både Fraunces och Karla ligger under SIL Open Font License, som
+   uttryckligen tillåter self-hosting.
+   =========================================================================== */
