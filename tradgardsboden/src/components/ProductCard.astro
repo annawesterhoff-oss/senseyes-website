@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ImageSlot from './ImageSlot.astro';
+import { frukttypNamn, prisText, produktUrl } from '../lib/produkt';
+
+interface Props { produkt: CollectionEntry<'produkter'>; }
+const { produkt } = Astro.props;
+const d = produkt.data;
+const sortbild = d.bilder.find((b) => b.visar_sorten) ?? null;
+const typ = d.frukttyp ? frukttypNamn[d.frukttyp] : null;
+---
+<article class="product-card">
+  <a href={produktUrl(produkt)} class="product-link">
+    <div class="product-media">
+      <ImageSlot bild={sortbild} label="Sortbild kommer" tone="linen" />
+    </div>
+    <div class="product-body">
+      {typ && <p class="product-type">{typ.singular}</p>}
+      <h3>{d.namn}</h3>
+      <dl class="product-facts">
+        <div><dt>Skördetid</dt><dd class:list={{ pending: !d.skordetid }}>{d.skordetid ?? 'Uppgift kommer'}</dd></div>
+        <div><dt>Självfertil</dt><dd class:list={{ pending: !d.sjalvfertil }}>{d.sjalvfertil ? { ja: 'Ja', delvis: 'Delvis', nej: 'Nej' }[d.sjalvfertil] : 'Uppgift kommer'}</dd></div>
+      </dl>
+      <p class="product-price">{prisText(produkt)}</p>
+    </div>
+  </a>
+</article>
+
+<style>
+  .product-card { background: var(--bg); border: 1px solid var(--hairline); border-radius: var(--radius); overflow: hidden; transition: border-color .3s ease, transform .4s cubic-bezier(.2,.8,.2,1); }
+  .product-card:hover { border-color: rgba(47, 74, 58, 0.35); transform: translateY(-3px); }
+  .product-link { display: flex; flex-direction: column; height: 100%; }
+  .product-media { aspect-ratio: 4 / 3; overflow: hidden; }
+  .product-media :global(.image-slot) { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.8,.2,1); }
+  .product-card:hover .product-media :global(.image-slot) { transform: scale(1.04); }
+  .product-body { padding: 22px 22px 24px; display: flex; flex-direction: column; flex: 1; }
+  .product-type { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--leaf-text); font-weight: 600; margin-bottom: 6px; }
+  h3 { font-size: 24px; margin-bottom: 14px; }
+  .product-facts { font-size: 14px; display: grid; gap: 4px; margin-bottom: 18px; }
+  .product-facts div { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px dashed var(--hairline); padding-bottom: 4px; }
+  .product-facts dt { color: var(--body); }
+  .product-facts dd { color: var(--heading); text-align: right; }
+  .product-price { margin-top: auto; font-size: 14px; color: var(--forest); }
+</style>
+<style>
+  @media (max-width: 560px) { .product-media { aspect-ratio: 16 / 9; } }
+</style>

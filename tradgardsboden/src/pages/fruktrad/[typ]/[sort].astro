@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageIntro from '../../../components/PageIntro.astro';
+import Underway from '../../../components/Underway.astro';
+import { frukttypNamn } from '../../../lib/produkt';
+
+export async function getStaticPaths() {
+  const produkter = await getCollection('produkter', (p) => p.data.publicerad && p.data.frukttyp !== null);
+  return produkter.map((p) => ({ params: { typ: frukttypNamn[p.data.frukttyp!].slug, sort: p.id }, props: { produkt: p } }));
+}
+const { produkt } = Astro.props;
+const typ = frukttypNamn[produkt.data.frukttyp!];
+---
+<BaseLayout title={`${typ.singular} ${produkt.data.namn} | Trädgårdsboden`} description={`${typ.singular} ${produkt.data.namn} – sortinformation och förfrågan.`} noindex>
+  <PageIntro eyebrow={typ.singular} title={produkt.data.namn} />
+  <Underway etapp="etapp 3 (produktsidor)" />
+</BaseLayout>

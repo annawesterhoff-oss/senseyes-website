@@ -1,0 +1,36 @@
+---
+/*
+  Bildyta som visar en riktig bild om den finns – annars en tydlig platshållare.
+  Platshållaren får aldrig se ut som ett foto av en viss sort.
+*/
+import Sprig from './Sprig.astro';
+
+interface Props {
+  bild?: { src: string; alt: string } | null;
+  label?: string;
+  tone?: 'linen' | 'moss' | 'clay' | 'forest';
+  class?: string;
+  eager?: boolean;
+}
+const { bild = null, label = 'Foto kommer', tone = 'moss', class: className = '', eager = false } = Astro.props;
+---
+{bild ? (
+  <img class:list={['image-slot', className]} src={bild.src} alt={bild.alt}
+    loading={eager ? 'eager' : 'lazy'} decoding="async" />
+) : (
+  <div class:list={['image-slot', 'placeholder', `tone-${tone}`, className]} role="img" aria-label={`Platshållare: ${label}`}>
+    <Sprig size={44} />
+    <span>{label}</span>
+  </div>
+)}
+
+<style>
+  .placeholder {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  }
+  .tone-moss { background: linear-gradient(160deg, #dfe4d4, #c9d2bd); color: #54704d; }
+  .tone-linen { background: linear-gradient(160deg, #efe8db, #e2d8c6); color: #7a6a55; }
+  .tone-clay { background: linear-gradient(160deg, #ecdccf, #dcc2b0); color: #8a5a42; }
+  .tone-forest { background: linear-gradient(160deg, #46604e, #2f4a3a); color: #c9d3c2; }
+</style>

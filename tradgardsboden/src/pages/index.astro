@@ -1,0 +1,300 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroArt from '../components/HeroArt.astro';
+import ImageSlot from '../components/ImageSlot.astro';
+import ProductCard from '../components/ProductCard.astro';
+import Sprig from '../components/Sprig.astro';
+import { kategoriUrl } from '../lib/produkt';
+
+const produkter = (await getCollection('produkter', (p) => p.data.publicerad)).sort((a, b) => a.data.ordning - b.data.ordning);
+const utvalda = produkter.filter((p) => p.data.utvald).slice(0, 4);
+const kategorier = (await getCollection('kategorier')).sort((a, b) => a.data.ordning - b.data.ordning);
+const antalPerTyp = (typ: string) => produkter.filter((p) => p.data.frukttyp === typ).length;
+const artiklar = (await getCollection('artiklar')).slice(0, 3);
+
+const tones = ['moss', 'linen', 'clay', 'moss', 'linen'] as const;
+
+const steg = [
+  { rubrik: 'Välj dina träd', text: 'Läs om sorterna och lägg de träd du är intresserad av i din förfrågan.' },
+  { rubrik: 'Skicka en förfrågan', text: 'Ange önskat leveranssätt. Förfrågan är kostnadsfri och inte bindande.' },
+  { rubrik: 'Vi kontrollerar', text: 'Vi stämmer av tillgänglighet med våra leverantörer – svenska plantskolor och grossister.' },
+  { rubrik: 'Du får en bekräftelse', text: 'Du får ett besked om pris, frakt och leveranstid. Först då tar du ställning.' },
+  { rubrik: 'Leverans eller avhämtning', text: 'När beställningen är betald skickas träden till dig – eller så hämtar du dem i Sankt Olof.' },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Store',
+  name: 'Trädgårdsboden',
+  description: 'Fruktträd och trädgårdsväxter för skånska trädgårdar.',
+  url: 'https://tradgardsboden.se/',
+  address: { '@type': 'PostalAddress', addressLocality: 'Sankt Olof', addressRegion: 'Skåne', addressCountry: 'SE' },
+  areaServed: { '@type': 'AdministrativeArea', name: 'Skåne' },
+};
+---
+<BaseLayout
+  title="Trädgårdsboden – Fruktträd för skånska trädgårdar | Sankt Olof, Österlen"
+  description="Köp fruktträd anpassade för skånska trädgårdar. Äppel-, päron-, plommon-, körsbärs- och persikoträd – utvalda med omsorg i Sankt Olof på Österlen."
+  jsonLd={jsonLd}
+>
+  <!-- Startbild -->
+  <section class="hero">
+    <div class="hero-media">
+      <HeroArt />
+    </div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Sankt Olof · Österlen</p>
+      <h1>Trädgårdsboden</h1>
+      <p class="hero-sub">Fruktträd &amp; trädgårdsväxter för skånska trädgårdar.</p>
+      <div class="hero-buttons">
+        <a href="/fruktrad/" class="btn btn-solid">Se fruktträden</a>
+        <a href="/hitta-ratt-fruktrad/" class="btn btn-ghost">Hitta rätt fruktträd</a>
+      </div>
+    </div>
+    <p class="hero-credit">Illustration – ersätts med foto</p>
+  </section>
+
+  <!-- Välkommen -->
+  <section class="intro">
+    <div class="wrap">
+      <div class="eyebrow center">Välkommen</div>
+      <h2 class="section-title">En liten trädgårdsbutik <i>från Österlen</i></h2>
+      <p class="lede">
+        Trädgårdsboden hjälper dig att hitta fruktträd som trivs i skånska trädgårdar.
+        Vi väljer ut sorterna med omsorg, ger dig tydlig information och samarbetar med
+        svenska plantskolor och grossister som levererar träden. Du får personlig service –
+        från första frågan till planteringen.
+      </p>
+      <ul class="values">
+        <li><Sprig size={34} /><span><strong>Noggrant utvalt</strong>Sorter som passar odlingsförhållandena i Skåne.</span></li>
+        <li><Sprig size={34} /><span><strong>Tydlig information</strong>Vi skriver bara det vi har kunnat kontrollera.</span></li>
+        <li><Sprig size={34} /><span><strong>Personlig service</strong>Liten skala, och du har alltid någon att fråga.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Kategorier -->
+  <section class="section-bg">
+    <div class="wrap">
+      <div class="section-head-row">
+        <div>
+          <div class="eyebrow">Sortimentet</div>
+          <h2 class="section-title">Fruktträd för <i>skånska trädgårdar</i></h2>
+        </div>
+        <a href="/fruktrad/" class="text-link">Alla fruktträd <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="categories">
+        {kategorier.map((k, i) => (
+          <a href={kategoriUrl(k.data.frukttyp)} class:list={['category-card', { wide: i < 2 }]}>
+            <ImageSlot bild={k.data.bild} label="Foto kommer" tone={tones[i % tones.length]} />
+            <div class="category-info">
+              <h3>{k.data.namn}</h3>
+              <p>{k.data.kort_text}</p>
+              <span class="category-count">{antalPerTyp(k.data.frukttyp)} sorter</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Utvalda -->
+  <section>
+    <div class="wrap">
+      <div class="section-head-row">
+        <div>
+          <div class="eyebrow">Utvalda fruktträd</div>
+          <h2 class="section-title">Ett första <i>urval</i></h2>
+        </div>
+        <a href="/fruktrad/" class="text-link">Se hela sortimentet <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="products">
+        {utvalda.map((p) => <ProductCard produkt={p} />)}
+      </div>
+      <p class="data-note">
+        Sortuppgifterna kontrolleras just nu mot plantskolornas information. Uppgifter som ännu
+        inte är kontrollerade står som ”uppgift kommer”.
+      </p>
+    </div>
+  </section>
+
+  <!-- Så fungerar det -->
+  <section class="section-moss" id="sa-fungerar-det">
+    <div class="wrap">
+      <div class="section-head center">
+        <div class="eyebrow center">Så fungerar det</div>
+        <h2 class="section-title">Från förfrågan <i>till planterat träd</i></h2>
+        <p class="lede">Vi har inget eget lager. I stället beställer vi träden från leverantören först när allt är klart med dig.</p>
+      </div>
+      <ol class="steps">
+        {steg.map((s, i) => (
+          <li>
+            <span class="step-no">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{s.rubrik}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+      <aside class="notice">
+        <strong>Bra att veta:</strong> En förfrågan är inte en genomförd beställning och ingen garanti för att trädet finns
+        tillgängligt. Ingen betalning sker förrän vi har bekräftat pris, frakt och leveranstid med dig.
+      </aside>
+      <div class="center-row">
+        <a href="/leverans-och-avhamtning/" class="btn btn-outline">Läs om leverans &amp; avhämtning</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Odlingsråd -->
+  <section>
+    <div class="wrap">
+      <div class="section-head-row">
+        <div>
+          <div class="eyebrow">Odlingsråd</div>
+          <h2 class="section-title">Inspiration <i>och kunskap</i></h2>
+        </div>
+        <a href="/odlingsrad/" class="text-link">Alla odlingsråd <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="articles">
+        {artiklar.map((a, i) => (
+          <article class="article-card">
+            <a href={a.data.publicerad ? `/odlingsrad/${a.id}/` : '/odlingsrad/'}>
+              <ImageSlot bild={a.data.bild} label="Bild kommer" tone={(['clay', 'moss', 'linen'] as const)[i % 3]} />
+              <div class="article-body">
+                {!a.data.publicerad && <span class="tag">Kommer snart</span>}
+                <h3>{a.data.titel}</h3>
+                <p>{a.data.ingress}</p>
+              </div>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Om -->
+  <section class="section-bg">
+    <div class="wrap split">
+      <div class="split-media">
+        <ImageSlot label="Foto från Sankt Olof kommer" tone="forest" />
+      </div>
+      <div class="split-text">
+        <div class="eyebrow">Om Trädgårdsboden</div>
+        <h2 class="section-title">Småskaligt, personligt <i>och omsorgsfullt</i></h2>
+        <p>
+          Trädgårdsboden är en nystartad verksamhet i Sankt Olof på Österlen. Här väljer vi ut
+          fruktträd, svarar på dina frågor och tar hand om din beställning från början till slut.
+        </p>
+        <p>
+          Träden kommer från svenska plantskolor och grossister som vi samarbetar med. På så sätt
+          kan vi hålla verksamheten liten och personlig – och lägga tiden på att hjälpa dig välja rätt.
+        </p>
+        <a href="/om-tradgardsboden/" class="btn btn-outline">Läs mer om oss</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Startbild */
+  .hero { position: relative; min-height: min(88vh, 860px); background: #2f4a3a; display: flex; align-items: flex-end; overflow: hidden; padding: 0; }
+  .hero-media { position: absolute; inset: 0; animation: heroReveal 1.8s ease-out both; }
+  @keyframes heroReveal { from { transform: scale(1.07); opacity: 0; } to { transform: scale(1.02); opacity: 1; } }
+  .hero-media { transform: scale(1.02); }
+  .hero::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(20, 30, 24, 0.02) 0%, rgba(20, 30, 24, 0.08) 50%, rgba(18, 28, 22, 0.58) 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 2; width: 100%; max-width: var(--wrap); margin: 0 auto;
+    padding: 0 var(--gutter) 84px; color: var(--on-dark);
+    animation: fadeUp 1s ease-out .5s both;
+  }
+  .hero-eyebrow { font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: #eef0e6; margin-bottom: 14px; }
+  .hero h1 { color: #fffdf8; font-size: clamp(46px, 7.4vw, 92px); font-weight: 400; line-height: 1.02; letter-spacing: -0.01em; margin-bottom: 14px; }
+  .hero-sub { font-family: var(--serif); font-style: italic; font-size: clamp(18px, 2.2vw, 25px); color: #f1ede2; max-width: 40ch; margin-bottom: 36px; }
+  .hero-buttons { display: flex; flex-wrap: wrap; gap: 14px; }
+  /* Ljus knapp mot den mörka marken i bilden */
+  .hero .btn-solid { background: var(--on-dark); color: var(--forest); }
+  .hero .btn-solid:hover { background: #fffdf8; }
+  .hero-credit { position: absolute; right: 16px; bottom: 12px; z-index: 2; font-size: 11px; letter-spacing: 0.06em; color: rgba(246, 241, 231, 0.7); }
+
+  /* Välkommen */
+  .intro { text-align: center; }
+  .intro .section-title { margin: 0 auto 24px; }
+  .intro .lede { margin: 0 auto; }
+  .values { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 960px; margin: 60px auto 0; text-align: left; }
+  .values li { display: flex; gap: 14px; align-items: flex-start; padding: 22px; background: var(--bg-section); border-radius: var(--radius); font-size: 15px; }
+  .values li :global(.sprig) { color: var(--leaf-text); flex-shrink: 0; }
+  .values strong { display: block; font-family: var(--serif); font-weight: 500; font-size: 18px; color: var(--heading); margin-bottom: 4px; }
+
+  /* Kategorier */
+  .categories { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
+  .category-card { grid-column: span 2; position: relative; min-height: 300px; display: flex; align-items: flex-end; overflow: hidden; border-radius: var(--radius); }
+  .category-card.wide { grid-column: span 3; min-height: 380px; }
+  .category-card :global(.image-slot) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(.2,.8,.2,1); }
+  .category-card :global(.placeholder) { justify-content: flex-start; padding-top: 18%; }
+  .category-card:hover :global(.image-slot) { transform: scale(1.05); }
+  .category-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(20, 28, 22, 0) 35%, rgba(20, 28, 22, 0.62) 100%); }
+  .category-info { position: relative; z-index: 2; padding: 28px; color: var(--on-dark); }
+  .category-info h3 { color: #fffdf8; font-size: 27px; margin-bottom: 6px; }
+  .category-info p { font-size: 14.5px; color: #ebe7dc; max-width: 36ch; margin-bottom: 10px; }
+  .category-count { font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: #dfe5d8; }
+
+  /* Produkter */
+  .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+  .data-note { margin-top: 28px; font-size: 13.5px; color: #6c716a; max-width: 70ch; }
+
+  /* Steg */
+  .steps { list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); gap: 22px; counter-reset: steg; }
+  .steps li { position: relative; padding-top: 22px; border-top: 1px solid rgba(47, 74, 58, 0.25); }
+  .step-no { font-family: var(--serif); font-style: italic; font-size: 30px; color: var(--forest); display: block; margin-bottom: 10px; }
+  .steps h3 { font-size: 20px; margin-bottom: 8px; }
+  .steps p { font-size: 14.5px; }
+  .notice { margin: 52px auto 0; max-width: 760px; padding: 20px 24px; border-left: 3px solid var(--clay); background: rgba(250, 247, 241, 0.75); font-size: 15px; border-radius: 0 var(--radius) var(--radius) 0; }
+  .notice strong { color: var(--heading); }
+  .center-row { display: flex; justify-content: center; margin-top: 40px; }
+
+  /* Artiklar */
+  .articles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+  .article-card a { display: block; }
+  .article-card :global(.image-slot) { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--radius); }
+  .article-body { padding-top: 18px; }
+  .article-body .tag { margin-bottom: 10px; }
+  .article-body h3 { font-size: 22px; margin-bottom: 8px; transition: color .25s ease; }
+  .article-card a:hover h3 { color: var(--forest); }
+  .article-body p { font-size: 15px; }
+
+  /* Om */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+  .split-media :global(.image-slot) { width: 100%; height: 460px; object-fit: cover; border-radius: var(--radius); }
+  .split-text p { margin-bottom: 18px; }
+  .split-text .btn { margin-top: 10px; }
+
+  @media (max-width: 1080px) {
+    .products { grid-template-columns: repeat(2, 1fr); }
+    .steps { grid-template-columns: repeat(2, 1fr); gap: 32px 26px; }
+  }
+  @media (max-width: 860px) {
+    .hero { min-height: 86svh; }
+    /* Mobil: bilden fyller övre delen, texten ligger på den mörka marken under */
+    .hero-media { bottom: 34%; -webkit-mask-image: linear-gradient(#000 92%, transparent); mask-image: linear-gradient(#000 92%, transparent); }
+    .hero-content { padding-bottom: 64px; }
+    .values { grid-template-columns: 1fr; margin-top: 40px; gap: 14px; }
+    .categories { grid-template-columns: 1fr 1fr; gap: 14px; }
+    .category-card, .category-card.wide { grid-column: span 1; min-height: 240px; }
+    .category-card.wide:first-child { grid-column: 1 / -1; min-height: 300px; }
+    .category-info { padding: 20px; }
+    .category-info h3 { font-size: 22px; }
+    .category-info p { display: none; }
+    .articles { grid-template-columns: 1fr; gap: 34px; }
+    .split { grid-template-columns: 1fr; gap: 36px; }
+    .split-media :global(.image-slot) { height: 300px; }
+  }
+  @media (max-width: 560px) {
+    .products { grid-template-columns: 1fr; }
+    .steps { grid-template-columns: 1fr; }
+    .hero-buttons .btn { flex: 1 1 100%; justify-content: center; }
+  }
+</style>

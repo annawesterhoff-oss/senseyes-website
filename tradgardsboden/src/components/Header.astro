@@ -1,0 +1,134 @@
+---
+import Wordmark from './Wordmark.astro';
+import { huvudmeny } from './nav';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || path.startsWith(href);
+---
+<header class="site-header">
+  <div class="nav">
+    <Wordmark />
+
+    <nav class="navlinks" id="huvudmeny" aria-label="Huvudmeny">
+      {huvudmeny.map((l) => (
+        <a href={l.href} class:list={{ active: isActive(l.href) }} aria-current={isActive(l.href) ? 'page' : undefined}>{l.text}</a>
+      ))}
+    </nav>
+
+    <div class="nav-actions">
+      <a href="/forfragan/" class="inquiry-link" aria-label="Din förfrågan">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 8h14l-1.2 11.2a1 1 0 0 1-1 .8H7.2a1 1 0 0 1-1-.8L5 8Z" />
+          <path d="M9 8V6.5a3 3 0 0 1 6 0V8" />
+        </svg>
+        <span class="inquiry-text">Förfrågan</span>
+        <span class="inquiry-count" data-inquiry-count hidden>0</span>
+      </a>
+      <button class="navtoggle" type="button" aria-expanded="false" aria-controls="huvudmeny">
+        <span class="sr-only">Meny</span>
+        <span class="bars" aria-hidden="true"><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector('.site-header');
+  const toggle = header?.querySelector<HTMLButtonElement>('.navtoggle');
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    header?.classList.toggle('menu-open', !open);
+    document.body.classList.toggle('no-scroll', !open);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && header?.classList.contains('menu-open')) toggle?.click();
+  });
+
+  // Antal träd i förfrågningslistan (sparas endast i besökarens webbläsare).
+  try {
+    const list = JSON.parse(localStorage.getItem('tb-forfragan') || '[]');
+    const n = Array.isArray(list) ? list.reduce((s, r) => s + (Number(r.antal) || 1), 0) : 0;
+    const badge = document.querySelector<HTMLElement>('[data-inquiry-count]');
+    if (badge && n > 0) { badge.textContent = String(n); badge.hidden = false; }
+  } catch { /* localStorage kan vara blockerat – då visas inget antal */ }
+</script>
+
+<style>
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250, 247, 241, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .nav {
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    padding: 16px var(--gutter);
+    max-width: var(--wrap); margin: 0 auto;
+  }
+  .navlinks { display: flex; column-gap: 26px; font-size: 14px; letter-spacing: 0.02em; }
+  .navlinks a { position: relative; padding: 4px 0; white-space: nowrap; transition: color .25s ease; }
+  .navlinks a:hover, .navlinks a.active { color: var(--heading); }
+  .navlinks a::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -2px;
+    height: 1px; background: var(--leaf);
+    transform: scaleX(0); transform-origin: left; transition: transform .3s ease;
+  }
+  .navlinks a:hover::after, .navlinks a.active::after { transform: scaleX(1); }
+
+  .nav-actions { display: flex; align-items: center; gap: 14px; }
+  .inquiry-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 8px 14px; border: 1px solid var(--hairline); border-radius: 20px;
+    font-size: 13.5px; color: var(--heading);
+    transition: border-color .25s ease, background-color .25s ease;
+  }
+  .inquiry-link:hover { border-color: var(--forest); }
+  .inquiry-link svg path { fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .inquiry-count {
+    min-width: 20px; height: 20px; padding: 0 6px; border-radius: 10px;
+    background: var(--forest); color: var(--on-dark); font-size: 12px; line-height: 20px; text-align: center;
+  }
+  .inquiry-count[hidden] { display: none; }
+
+  .navtoggle { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; }
+  .bars { position: relative; width: 22px; height: 10px; }
+  .bars span {
+    position: absolute; left: 0; right: 0; height: 1.5px; background: var(--heading);
+    transition: transform .3s ease, top .3s ease;
+  }
+  .bars span:first-child { top: 0; }
+  .bars span:last-child { top: 8.5px; }
+
+  @media (max-width: 1080px) {
+    .navtoggle { display: inline-flex; }
+    .navlinks {
+      /* absolute, inte fixed: backdrop-filter gör sidhuvudet till referensram */
+      position: absolute; top: 100%; left: 0; right: 0; z-index: 49;
+      height: calc(100dvh - 100%); overflow-y: auto;
+      flex-direction: column; gap: 0;
+      padding: 12px var(--gutter) 40px;
+      background: var(--bg);
+      font-family: var(--serif); font-size: 24px; letter-spacing: 0;
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: opacity .3s ease, transform .3s ease, visibility 0s linear .3s;
+    }
+    .navlinks a { padding: 16px 0; border-bottom: 1px solid var(--hairline); }
+    .navlinks a::after { display: none; }
+    .navlinks a.active { color: var(--forest); font-style: italic; }
+    .menu-open .navlinks {
+      opacity: 1; visibility: visible; transform: none;
+      transition: opacity .3s ease, transform .3s ease;
+    }
+    .menu-open .bars span:first-child { top: 4.25px; transform: rotate(45deg); }
+    .menu-open .bars span:last-child { top: 4.25px; transform: rotate(-45deg); }
+  }
+  @media (max-width: 480px) {
+    .nav { padding: 14px var(--gutter); gap: 12px; }
+    .inquiry-text { display: none; }
+    .inquiry-link { padding: 8px 12px; }
+    .nav :global(.wordmark) { font-size: 21px; }
+  }
+  :global(body.no-scroll) { overflow: hidden; }
+</style>
