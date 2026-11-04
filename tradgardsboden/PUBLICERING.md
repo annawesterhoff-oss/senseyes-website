@@ -10,6 +10,10 @@ Steg-för-steg för att koppla **tradgardsboden.se** (registrerad hos Loopia) ti
 
 ---
 
+## Beslut
+- Domänen tradgardsboden.se är köpt hos Loopia.
+- E-post: vidarebefordring via Cloudflare Email Routing (alternativ A) tills vidare.
+
 ## Steg 1 – Domänen hos Loopia
 
 1. Logga in på **loopia.se → Kundzon**.

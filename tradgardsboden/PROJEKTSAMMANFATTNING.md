@@ -12,7 +12,8 @@ med `tradgardsboden.zip` när du fortsätter arbetet i en ny konversation med Cl
 | | |
 |---|---|
 | Namn | Trädgårdsboden |
-| Domän | tradgardsboden.se (kontrollera att den är registrerad) |
+| Domän | tradgardsboden.se – köpt hos Loopia. DNS flyttas till Cloudflare vid lansering (se `PUBLICERING.md`) |
+| E-post | hej@tradgardsboden.se vidarebefordras gratis via Cloudflare till befintlig e-post |
 | Undertitel | Fruktträd & trädgårdsväxter för skånska trädgårdar. |
 | Ort | Sankt Olof, Österlen, Skåne |
 | Inriktning | Fruktträd först, senare bärbuskar, perenner, rosor, häckväxter m.m. |
