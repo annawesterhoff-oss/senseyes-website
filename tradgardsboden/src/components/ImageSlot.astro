@@ -3,19 +3,24 @@
   Bildyta som visar en riktig bild om den finns – annars en tydlig platshållare.
   Platshållaren får aldrig se ut som ett foto av en viss sort.
 */
+import type { ImageMetadata } from 'astro';
+import { Picture } from 'astro:assets';
 import Sprig from './Sprig.astro';
 
 interface Props {
-  bild?: { src: string; alt: string } | null;
+  bild?: { src: ImageMetadata; alt: string } | null;
+  /** Bildens visningsbredd, för att webbläsaren ska välja rätt storlek. */
+  sizes?: string;
   label?: string;
   tone?: 'linen' | 'moss' | 'clay' | 'forest';
   class?: string;
   eager?: boolean;
 }
-const { bild = null, label = 'Foto kommer', tone = 'moss', class: className = '', eager = false } = Astro.props;
+const { bild = null, sizes = '(max-width: 860px) 100vw, 50vw', label = 'Foto kommer', tone = 'moss', class: className = '', eager = false } = Astro.props;
 ---
 {bild ? (
-  <img class:list={['image-slot', className]} src={bild.src} alt={bild.alt}
+  <Picture class:list={['image-slot', className]} src={bild.src} alt={bild.alt}
+    formats={['avif', 'webp']} fallbackFormat="webp" widths={[480, 800, 1200]} sizes={sizes}
     loading={eager ? 'eager' : 'lazy'} decoding="async" />
 ) : (
   <div class:list={['image-slot', 'placeholder', `tone-${tone}`, className]} role="img" aria-label={`Platshållare: ${label}`}>

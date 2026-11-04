@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
+import type { SchemaContext } from 'astro:content';
 
 /*
   Innehållsmodell för Trädgårdsboden.
@@ -16,8 +17,9 @@ import { z } from 'astro/zod';
 
 const tomText = z.string().nullable().default(null);
 
-const bild = z.object({
-  src: z.string(),
+// Bilder läggs i src/assets/bilder/ och optimeras automatiskt vid bygget.
+const bild = (image: SchemaContext['image']) => z.object({
+  src: image(),
   alt: z.string(),
   // Fotograf/leverantör och licens – krävs för att bilden ska få användas.
   kalla: z.string(),
@@ -43,7 +45,7 @@ const erbjudande = z.object({
 
 const produkter = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/produkter' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     namn: z.string(),
     // Fruktträd först – fler kategorier kan läggas till utan ombyggnad.
     kategori: z.enum(['fruktrad', 'barbuskar', 'perenner', 'rosor', 'hackvaxter']),
@@ -54,7 +56,7 @@ const produkter = defineCollection({
     ordning: z.number().default(100),
 
     ingress: tomText,
-    bilder: z.array(bild).default([]),
+    bilder: z.array(bild(image)).default([]),
     smak_och_anvandning: tomText,
     skordetid: tomText,
     skordeperiod: z.enum(['tidig', 'medel', 'sen']).nullable().default(null),
@@ -84,12 +86,12 @@ const produkter = defineCollection({
 
 const kategorier = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/kategorier' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     namn: z.string(), // "Äppelträd"
     frukttyp: z.enum(['appeltrad', 'paron', 'plommon', 'korsbar', 'persika']),
     kort_text: z.string(),
     ordning: z.number().default(100),
-    bild: bild.nullable().default(null),
+    bild: bild(image).nullable().default(null),
     seo_titel: tomText,
     seo_beskrivning: tomText,
   }),
@@ -97,12 +99,12 @@ const kategorier = defineCollection({
 
 const artiklar = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/artiklar' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     titel: z.string(),
     ingress: z.string(),
     publicerad: z.boolean().default(false),
     datum: z.coerce.date().nullable().default(null),
-    bild: bild.nullable().default(null),
+    bild: bild(image).nullable().default(null),
     seo_beskrivning: tomText,
   }),
 });
