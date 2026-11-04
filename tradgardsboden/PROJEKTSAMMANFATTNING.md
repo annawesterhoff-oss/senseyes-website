@@ -178,8 +178,9 @@ Alla textfärger klarar kontrastkraven (WCAG AA).
 - Logotyp: ”Trädgårds*boden*” med kvisten framför
 - Sidhuvud: fast, halvgenomskinligt med oskärpa, länk ”Förfrågan” med antal träd
 - Mobilmeny: helskärm med stora serif-länkar
-- Startbild: tillfällig illustration (Österlenlandskap med blommande fruktträd och havet),
-  märkt ”Illustration – ersätts med foto”
+- Startbild: AI-genererad (ChatGPT) miljöbild i fotostil – blommande äppelträd, stenmur,
+  rapsfält, vitkalkad gård och havet. Beskrivs aldrig som en bild av en verklig plats.
+  Bildinstruktioner för övriga bilder finns i `BILDINSTRUKTIONER.md`
 - Kategorikort med bild och mörk tonad yta, produktkort med faktarader, steg 01–05
 - Mjuka animationer (startbild tonar in, text glider upp, bilder zoomar lätt vid hovring),
   avstängda för den som valt minskad rörelse i sitt system
@@ -272,14 +273,11 @@ Enligt eplanta.com finns bl.a. Aroma och Discovery bland de E-märkta fruktträd
 
 ### Öppna frågor till ägaren
 1. Färger och känsla – lagom skogsgrönt, eller varmare/ljusare?
-2. Illustrationen som tillfällig startbild – behålla, eller enklare platshållare?
-3. Tonen – ”vi” eller ”jag” med eget namn?
-4. Vilka leverantörer blir det?
+2. Tonen – ”vi” eller ”jag” med eget namn?
+3. Vilka leverantörer blir det?
 
 ### Kända problem
-- GitHub nekar Claude att spara (fel 403). Åtgärd: koppla om GitHub via
-  https://claude.ai/connect-github och installera Claude GitHub App på förrådet `senseyes-website`.
-  Tills dess finns koden bara i `tradgardsboden.zip`.
+- Inga kända problem. (GitHub-behörigheten är fixad – allt sparas i förrådet.)
 
 ### Observationer om Senseye (inte åtgärdade, Senseye ska inte ändras utan beslut)
 - Ingen meny på mobilen

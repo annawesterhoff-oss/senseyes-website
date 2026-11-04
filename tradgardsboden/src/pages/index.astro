@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import HeroArt from '../components/HeroArt.astro';
+import { Picture } from 'astro:assets';
+import startbild from '../assets/bilder/startbild.webp';
 import ImageSlot from '../components/ImageSlot.astro';
 import ProductCard from '../components/ProductCard.astro';
 import Sprig from '../components/Sprig.astro';
@@ -41,7 +42,17 @@ const jsonLd = {
   <!-- Startbild -->
   <section class="hero">
     <div class="hero-media">
-      <HeroArt />
+      <Picture
+        src={startbild}
+        formats={['avif', 'webp']}
+        fallbackFormat="webp"
+        widths={[640, 960, 1280, 1536]}
+        sizes="100vw"
+        alt="Blommande äppelträd i en fruktträdgård med stenmur, rapsfält och havet i fjärran"
+        loading="eager"
+        fetchpriority="high"
+        class="hero-img"
+      />
     </div>
     <div class="hero-content">
       <p class="hero-eyebrow">Sankt Olof · Österlen</p>
@@ -52,7 +63,6 @@ const jsonLd = {
         <a href="/hitta-ratt-fruktrad/" class="btn btn-ghost">Hitta rätt fruktträd</a>
       </div>
     </div>
-    <p class="hero-credit">Illustration – ersätts med foto</p>
   </section>
 
   <!-- Välkommen -->
@@ -204,7 +214,9 @@ const jsonLd = {
   .hero-media { transform: scale(1.02); }
   .hero::after {
     content: ''; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(180deg, rgba(20, 30, 24, 0.02) 0%, rgba(20, 30, 24, 0.08) 50%, rgba(18, 28, 22, 0.58) 100%);
+    background:
+      linear-gradient(90deg, rgba(18, 28, 22, 0.38) 0%, rgba(18, 28, 22, 0) 58%),
+      linear-gradient(180deg, rgba(20, 30, 24, 0.02) 0%, rgba(20, 30, 24, 0.08) 50%, rgba(18, 28, 22, 0.58) 100%);
   }
   .hero-content {
     position: relative; z-index: 2; width: 100%; max-width: var(--wrap); margin: 0 auto;
@@ -218,7 +230,7 @@ const jsonLd = {
   /* Ljus knapp mot den mörka marken i bilden */
   .hero .btn-solid { background: var(--on-dark); color: var(--forest); }
   .hero .btn-solid:hover { background: #fffdf8; }
-  .hero-credit { position: absolute; right: 16px; bottom: 12px; z-index: 2; font-size: 11px; letter-spacing: 0.06em; color: rgba(246, 241, 231, 0.7); }
+  .hero-media :global(.hero-img) { width: 100%; height: 100%; object-fit: cover; object-position: 60% 45%; }
 
   /* Välkommen */
   .intro { text-align: center; }
